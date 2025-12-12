@@ -1,4 +1,4 @@
-import { addToCart } from "./src/utils/cartUtils";
+import { useCartStore } from "./src/store/CartStore";
 
 let products = [];
 
@@ -29,16 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
       card.className = "product__card";
 
       card.innerHTML = `
-        <img src="${product.image}" alt="${product.title}" class="product__image" />
-        <div class="product__info">
-          <h3 class="product__title">${product.title}</h3>
-          <p class="product__price">$${product.price}</p>
-          <button class="btn btn-primary add-to-cart">Add to Cart</button>
-        </div>
-      `;
+      <img src="${product.image}" alt="${product.title}" class="product__image" />
+      <div class="product__info">
+        <h3 class="product__title">${product.title}</h3>
+        <p class="product__price">$${product.price}</p>
+        <button class="btn btn-primary add-to-cart">Add to Cart</button>
+      </div>
+    `;
+
+      const addItem = useCartStore.getState().addItem;
 
       card.querySelector(".add-to-cart").addEventListener("click", () => {
-        addToCart(product);
+        addItem(product);
       });
 
       container.appendChild(card);

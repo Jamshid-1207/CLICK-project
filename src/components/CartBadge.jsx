@@ -1,23 +1,7 @@
-import { useState, useEffect } from "react";
+import { useCartStore } from "../store/CartStore";
 
 export const CartBadge = () => {
-  const [count, setCount] = useState(0);
-
-  const updateCount = () => {
-    try {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-      setCount(total);
-    } catch {
-      setCount(0);
-    }
-  };
-
-  useEffect(() => {
-    updateCount();
-    window.addEventListener("cartUpdated", updateCount);
-    return () => window.removeEventListener("cartUpdated", updateCount);
-  }, []);
+  const count = useCartStore((state) => state.count);
 
   return (
     <div className="cart__badge">
