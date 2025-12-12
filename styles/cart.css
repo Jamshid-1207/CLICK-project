@@ -8,6 +8,11 @@
 #cart__root {
   position: fixed;
   right: 50px;
+  z-index: 100;
+}
+
+.cart__list {
+  display: block;
 }
 
 .cart__item {

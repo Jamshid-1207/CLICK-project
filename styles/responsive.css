@@ -14,15 +14,22 @@
   .section {
     display: block !important;
   }
-
-  .tabs {
-    /* display: none; */
-  }
 }
 
 @media (max-width: 767px) {
   .products__container {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #cart__section {
+    display: block;
+    margin-top: 20px;
   }
 
   header {
