@@ -1,5 +1,4 @@
-import { useCartStore } from "./src/store/CartStore";
-
+import { addCardEventListeners } from "./src/utils/cartUtils";
 let products = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,19 +28,33 @@ document.addEventListener("DOMContentLoaded", () => {
       card.className = "product__card";
 
       card.innerHTML = `
-      <img src="${product.image}" alt="${product.title}" class="product__image" />
-      <div class="product__info">
-        <h3 class="product__title">${product.title}</h3>
-        <p class="product__price">$${product.price}</p>
-        <button class="btn btn-primary add-to-cart">Add to Cart</button>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+
+      <div class="flip-card-front">
+        <img src="${product.image}" alt="${product.title}" class="product__image" />
+        <div class="product__info">
+          <h3 class="product__title">${product.title}</h3>
+          <p class="product__price">$${product.price}</p>
+
+          <div class="product__buttons">
+            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+            <button class="btn btn-secondary show-desc">Description</button>
+          </div>
+
+        </div>
       </div>
-    `;
 
-      const addItem = useCartStore.getState().addItem;
+      <div class="flip-card-back">
+        <h3>Description</h3>
+        <p class="product__description">${product.description}</p>
+        <button class="btn btn-secondary hide-desc">Back</button>
+      </div>
 
-      card.querySelector(".add-to-cart").addEventListener("click", () => {
-        addItem(product);
-      });
+    </div>
+  </div>
+`;
+      addCardEventListeners(card, product);
 
       container.appendChild(card);
     });
