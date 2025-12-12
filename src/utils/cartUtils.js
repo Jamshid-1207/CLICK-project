@@ -21,3 +21,12 @@ export const addToCart = (product) => {
     console.error("Ошибка при добавлении товара в корзину", err);
   }
 };
+
+export const getSavedCart = () => {
+  try {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    return savedCart.map(normalizeCartItem);
+  } catch {
+    return [];
+  }
+};
